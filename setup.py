@@ -12,6 +12,7 @@ ROOT_INCLUDE = ['requirements.txt', 'VERSION', 'LICENSE.txt']
 TELEJSON_REPO = 'https://bitbucket.org/luckydonald/tg-for-pytg2.git'
 COMPILE_DIR = 'telejson-src'
 COPY_FILES = ['*.lua', '*.pub']
+SCRIPTS = 'scripts'
 
 __author__ = 'nekmo'
 
@@ -145,6 +146,7 @@ def find_package_data(where='.', package='',
 
 description = 'Project Description'
 package_data = {'': ROOT_INCLUDE}
+scripts = []
 
 for module in MODULES:
     package_data.update(find_package_data(
@@ -179,7 +181,9 @@ class InstallCommand(install):
             raise Exception('Make not completed.')
         print('Copying files...')
         for bin in os.listdir(os.path.join(COMPILE_DIR, 'bin')):
-            shutil.copy(os.path.join(COMPILE_DIR, 'bin', bin), os.path.join(PROJECT, bin))
+            script = os.path.join(SCRIPTS, bin)
+            shutil.copy(os.path.join(COMPILE_DIR, 'bin', bin), script)
+            scripts.append(script)
         for typefile in COPY_FILES:
             for file in glob.glob1(COMPILE_DIR, typefile):
                 shutil.copy(os.path.join(COMPILE_DIR, file), os.path.join(PROJECT, file))
@@ -189,6 +193,7 @@ class InstallCommand(install):
             only_in_packages=False,
         ))
         install.run(self)
+        shutil.rmtree(COMPILE_DIR)
         # setuptools.command.build_py.build_py.run(self)
 
 
@@ -233,6 +238,7 @@ setup(
     package_data=package_data,
 
     download_url='',
+    scripts=scripts,
     keywords=[],
     cmdclass={
         'install': InstallCommand,
