@@ -8,6 +8,8 @@ docs/_build
 build
 dist
 *.egg-info
+telejson/*.pub
+telejson/*.lua
 
 # switch to regexp syntax.
 syntax: regexp
