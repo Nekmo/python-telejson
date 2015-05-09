@@ -144,7 +144,7 @@ def find_package_data(where='.', package='',
     return out
 ##############################################################################
 
-description = 'Project Description'
+description = 'Python Telejson Installer.'
 package_data = {'': ROOT_INCLUDE}
 scripts = []
 
@@ -198,7 +198,7 @@ class InstallCommand(install):
 
 
 setup(
-    name=PROJECT,
+    name='telejson-installer',
     version=VERSION,
 
     description=description,
@@ -210,7 +210,7 @@ setup(
     url='https://nekmo.com',
 
     classifiers=[
-        'Development Status :: 1 - Planning',
+        'Development Status :: 3 - Alpha',
         'License :: OSI Approved :: MIT License',
         'Intended Audience :: Developers',
         'Environment :: Console',
